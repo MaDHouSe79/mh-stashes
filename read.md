@@ -22,8 +22,8 @@
     </a>      
 </p>
 
-# Youtube 🙈
-- [Youtube](https://www.youtube.com/c/@MaDHouSe79)
+# My Youtube Channel
+- [Subscribe](https://www.youtube.com/c/@MaDHouSe79) 
 
 # mh-cashasitem
 - Use cash as item for qb-core
@@ -56,11 +56,13 @@ QBConfig.Money.DontAllowMinus = { 'cash', 'crypto', 'blackmoney' } -- Money that
 - use this server side only!
 - most used in trigger `inventory:server:SetInventoryData` and `inventory:server:GiveItem`
 ```lua
--- true at the end is to display money change, if false you dont see a change but it wil change the money amount
-TriggerEvent('mh-cashasitem:server:updateCash', src, itemData, amount, "add", true)
+-- true at the end of the trigger is to display money change at the right top of your screen
+-- if false you don't see a change but it will change the money amount
+TriggerEvent('mh-cashasitem:server:updateCash', src, itemData, amount, "add", true) -- this true
 
--- true at the end is to display money change, if false you dont see a change but it wil change the money amount
-TriggerEvent('mh-cashasitem:server:updateCash', src, itemData, amount, "remove", true) 
+-- true at the end of the trigger is to display money change at the right top of your screen
+-- if false you don't see a change but it will change the money amount
+TriggerEvent('mh-cashasitem:server:updateCash', src, itemData, amount, "remove", true) -- this true
 ```
 
 # buy item with blackmoney
@@ -75,8 +77,8 @@ https://www.youtube.com/watch?v=sWYkV-PeqU4
 - inventory itembox popup when you add or remove items.
 - set it all to false if you don't want it.
 ```lua
-local useItemBox = true    -- true if you want to use the itembox popup 
-local useAddBox = true     -- true if you want to see the add itembox popup (only works if useItemBox = true)
+local useItemBox = false   -- true if you want to use the itembox popup 
+local useAddBox = false    -- true if you want to see the add itembox popup (only works if useItemBox = true)
 local useRemoveBox = false -- true if you want to see the remove itembox popup (only works if useItemBox = true)
 ```
 
