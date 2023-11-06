@@ -327,7 +327,7 @@ end, false)
 ```
 - Change code in qb-inventory/server.lua
 
-# replace this code in qb-inventory/server/main.lua
+# Replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 	local src = source
@@ -353,7 +353,7 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 end)
 ```
 
-# replace this code in qb-inventory/server/main.lua
+# Replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 	local src = source
@@ -380,7 +380,7 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 end)
 ```
 
-# replace this code in qb-inventory/server/main.lua
+# Replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData',
     function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
@@ -1112,7 +1112,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
     end)
 ```
 
-# replace this code in qb-inventory/server/main.lua
+# Replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterServerEvent("inventory:server:GiveItem", function(target, name, amount, slot)
     local src = source
@@ -1252,7 +1252,7 @@ end)
 ```
 - Change code in ps-inventory/server.lua
 
-# replace this code in ps-inventory/server/main.lua
+# Replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
     local src = source
@@ -1302,7 +1302,7 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 end)
 ```
 
-# replace this code in ps-inventory/server/main.lua
+# Replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
     local src = source
@@ -1340,7 +1340,7 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 end)
 ```
 
-# replace this code in ps-inventory/server/main.lua
+# Replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
     local src = source
@@ -2845,7 +2845,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 end)
 ```
 
-# replace this code in ps-inventory/server/main.lua
+# Replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterServerEvent("inventory:server:GiveItem", function(target, name, amount, slot)
     local src = source
