@@ -243,10 +243,10 @@ end
 ***------------------------------------------------------------------***
 
 ## **INSTALL FOR QB INVENTORY**
-- [check the readme folder]('https://github.com/MaDHouSe79/mh-stashes/blob/main/readme/qb_inventory.md')
+- [check the readme folder](https://github.com/MaDHouSe79/mh-stashes/blob/main/readme/qb_inventory.md)
 
 ## **INSTALL FOR PS INVENTORY**
-- [check the readme folder]('https://github.com/MaDHouSe79/mh-stashes/blob/main/readme/ps_inventory.md')
+- [check the readme folder](https://github.com/MaDHouSe79/mh-stashes/blob/main/readme/ps_inventory.md)
 
 
 # Contributers
