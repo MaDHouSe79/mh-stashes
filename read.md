@@ -243,10 +243,11 @@ end
 ***------------------------------------------------------------------***
 
 ## **INSTALL FOR QB INVENTORY**
-- check the readme folder
+- [check the readme folder]('https://github.com/MaDHouSe79/mh-stashes/blob/main/readme/qb_inventory.md')
 
 ## **INSTALL FOR PS INVENTORY**
-- check the readme folder
+- [check the readme folder]('https://github.com/MaDHouSe79/mh-stashes/blob/main/readme/ps_inventory.md')
+
 
 # Contributers
 <a href="https://github.com/MaDHouSe79/mh-carlift/graphs/contributors">
