@@ -239,7 +239,7 @@ end
 ***------------------------------------------------------------------***
 
 ## **QB INVENTORY**
-# Replace this code below in ps-inventory/client/main.lua
+# Replace this code below in qb-inventory/client/main.lua
 ```lua
 RegisterCommand('inventory', function()
     if IsNuiFocused() then return end
