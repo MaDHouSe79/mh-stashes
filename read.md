@@ -5,21 +5,21 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/MaDHouSe79/mh-cashasitem/issues">
-    <img src="https://img.shields.io/github/issues/MaDHouSe79/mh-cashasitem"/> 
-  </a>
-  <a href="https://github.com/MaDHouSe79/mh-cashasitem/watchers">
-    <img src="https://img.shields.io/github/watchers/MaDHouSe79/mh-cashasitem"/> 
-  </a> 
-  <a href="https://github.com/MaDHouSe79/mh-cashasitem/network/members">
-    <img src="https://img.shields.io/github/forks/MaDHouSe79/mh-cashasitem"/> 
-  </a>  
-  <a href="https://github.com/MaDHouSe79/mh-cashasitem/stargazers">
-    <img src="https://img.shields.io/github/stars/MaDHouSe79/mh-cashasitem?color=white"/> 
-  </a>
-  <a href="https://github.com/MaDHouSe79/mh-cashasitem/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/MaDHouSe79/mh-cashasitem?color=black"/> 
-  </a>      
+    <a href="https://github.com/MaDHouSe79/mh-cashasitem/issues">
+        <img src="https://img.shields.io/github/issues/MaDHouSe79/mh-cashasitem"/> 
+    </a>
+    <a href="https://github.com/MaDHouSe79/mh-cashasitem/watchers">
+        <img src="https://img.shields.io/github/watchers/MaDHouSe79/mh-cashasitem"/> 
+    </a> 
+    <a href="https://github.com/MaDHouSe79/mh-cashasitem/network/members">
+        <img src="https://img.shields.io/github/forks/MaDHouSe79/mh-cashasitem"/> 
+    </a>  
+    <a href="https://github.com/MaDHouSe79/mh-cashasitem/stargazers">
+        <img src="https://img.shields.io/github/stars/MaDHouSe79/mh-cashasitem?color=white"/> 
+    </a>
+    <a href="https://github.com/MaDHouSe79/mh-cashasitem/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/MaDHouSe79/mh-cashasitem?color=black"/> 
+    </a>      
 </p>
 
 # Youtube 🙈
@@ -326,6 +326,7 @@ RegisterCommand('inventory', function()
 end, false)
 ```
 - Change code in qb-inventory/server.lua
+
 # replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
@@ -351,6 +352,7 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 	end
 end)
 ```
+
 # replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
@@ -377,6 +379,7 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 	end
 end)
 ```
+
 # replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData',
@@ -1108,6 +1111,7 @@ RegisterNetEvent('inventory:server:SetInventoryData',
         end
     end)
 ```
+
 # replace this code in qb-inventory/server/main.lua
 ```lua
 RegisterServerEvent("inventory:server:GiveItem", function(target, name, amount, slot)
@@ -1247,6 +1251,7 @@ RegisterCommand('inventory', function()
 end)
 ```
 - Change code in ps-inventory/server.lua
+
 # replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
@@ -1296,6 +1301,7 @@ RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
     end
 end)
 ```
+
 # replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
@@ -1333,6 +1339,7 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
     end
 end)
 ```
+
 # replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
@@ -2837,6 +2844,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
     end
 end)
 ```
+
 # replace this code in ps-inventory/server/main.lua
 ```lua
 RegisterServerEvent("inventory:server:GiveItem", function(target, name, amount, slot)
