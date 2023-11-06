@@ -241,10 +241,10 @@ end
 ```
 
 ## **INSTALL FOR QB INVENTORY**
-- [QB-Inventory](https://github.com/MaDHouSe79/mh-cashasitem/blob/main/readme/qb_inventory.md)
+- [READ-ME](https://github.com/MaDHouSe79/mh-cashasitem/blob/main/readme/qb_inventory.md)
 
 ## **INSTALL FOR PS INVENTORY**
-- [PS-Inventory](https://github.com/MaDHouSe79/mh-cashasitem/blob/main/readme/ps_inventory.md)
+- [READ-ME](https://github.com/MaDHouSe79/mh-cashasitem/blob/main/readme/ps_inventory.md)
 
 # Contributers
 <a href="https://github.com/MaDHouSe79/mh-carlift/graphs/contributors">
