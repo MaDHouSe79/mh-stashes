@@ -1,4 +1,4 @@
-## **PS INVENTORY**
+## **INSTALL FOR PS INVENTORY**
 # Replace this code below in ps-inventory/client/main.lua
 ```lua
 RegisterCommand('inventory', function()
