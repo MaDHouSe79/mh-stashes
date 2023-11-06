@@ -240,10 +240,10 @@ end
 ```
 ***------------------------------------------------------------------***
 
-## **QB INVENTORY**
+## **INSTALL FOR QB INVENTORY**
 - check the readme folder
 
-## **PS INVENTORY**
+## **INSTALL FOR PS INVENTORY**
 - check the readme folder
 
 # Contributers
