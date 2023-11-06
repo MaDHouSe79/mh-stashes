@@ -1,4 +1,4 @@
-## **QB INVENTORY**
+## **INSTALL FOR QB INVENTORY**
 # Replace this code below in qb-inventory/client/main.lua
 ```lua
 RegisterCommand('inventory', function()
