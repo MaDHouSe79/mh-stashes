@@ -39,7 +39,7 @@
 - Create a folder `[mh]` in resources,
 - Put the folder mh-cashasitem in the [mh] folder
 - Add in your server.cfg `ensure [mh]`, make sure this is below `ensure [standalone]`
-- Don't forget to use [mh-inventiory](https://github.com/MaDHouSe79/mh-inventory) and read the readme.
+- Don't forget to use [mh-inventiory](https://github.com/MaDHouSe79/mh-inventory) or [qb-inventiory](https://github.com/MaDHouSe79/qb-inventory) and read the readme.
 
 # Command
 - /blackmoney to see the amount
