@@ -31,13 +31,20 @@ it works also with mh-cashasitem.
 it also hase a wallet you can use to put all your cash and or card in it.
 
 # Possibilities
-- Your own Wallet (only cash or cards, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
-- A Cash Suitcase (only cash or markedmoney is allowed, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
-- Drugs Suitcase  (only drugs is allowed, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
-- Weapon Suitcase (only weapons is allowed, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
-- Small Bag (all items can be placed in this stash, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
-- Medium Bag (all items can be placed in this stash, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
-- Large Bag (all items can be placed in this stash, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items)
+- Your own Wallet
+- - Only cash or cards, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
+- A Cash Suitcase
+- - Only cash or markedmoney is allowed, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
+- Drugs Suitcase
+- - Only drugs is allowed, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
+- Weapon Suitcase
+- - Only weapons is allowed, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
+- Small Bag
+- - All items can be placed in this stash, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
+- Medium Bag
+- - All items can be placed in this stash, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
+- Large Bag
+- - All items can be placed in this stash, see `config.lua` `Config.Stashes` look for `allowedItems` if you want limit items.
 
 # Dependencies
 - [qb-core](https://github.com/qbcore-framework/qb-core)
