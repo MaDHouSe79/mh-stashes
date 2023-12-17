@@ -57,7 +57,6 @@ it also hase a wallet you can use to put all your cash and or card in it.
 
 # NOTE
 - Before you start make sure you add all your items you want to use in Config.Stashes.
-- 
 - if you change any value you need to restart the server
 - make sure the items in the inventory and mh-stashes config files are the same with the items.
 
