@@ -167,48 +167,6 @@ it also hase a wallet you can use to put all your cash and or card in it.
 },
 ```
 
-# New qb-inventory html/js/app.js
-```js
-case "apkdocument":
-    return `<p><strong>Naam: </strong><span>${itemData.info.firstname} ${itemData.info.lastname}</span></p>
-    <p><strong>Geboortedatum: </strong><span>${itemData.info.birthdate}</span></p>
-    <p><strong>Kenteken: </strong><span>${itemData.info.plate}</span></p>
-    <p><strong>Gekeurd door: </strong><span>${itemData.info.company}</span></p>
-    <p><strong>Nummer: </strong><span>${itemData.info.number}</span></p>
-    <p><strong>Verloopt op: </strong><span>${itemData.info.apkexpire}</span></p>`;
-            
-case "wokdocument":
-    return `<p><strong>Naam: </strong><span>${itemData.info.firstname} ${itemData.info.lastname}</span></p>
-    <p><strong>Geboortedatum: </strong><span>${itemData.info.birthdate}</span></p>
-    <p><strong>Kenteken: </strong><span>${itemData.info.plate}</span></p>
-    <p><strong>Nummer: </strong><span>${itemData.info.number}</span></p>
-    <p><strong>Verloopt op: </strong><span>${itemData.info.wokexpire}</span></p>`;
-            
-case "insurancewadocument":
-    return `<p><strong>Naam: </strong><span>${itemData.info.firstname} ${itemData.info.lastname}</span></p>
-    <p><strong>Geboortedatum: </strong><span>${itemData.info.birthdate}</span></p>
-    <p><strong>Kenteken: </strong><span>${itemData.info.plate}</span></p>
-    <p><strong>Bij Bedrijf: </strong><span>${itemData.info.company}</span></p>
-    <p><strong>Nummer: </strong><span>${itemData.info.number}</span></p>
-    <p><strong>Verloopt op: </strong><span>${itemData.info.inswaexpire}</span></p>`;
-            
-case "insurancewapdocument":
-    return `<p><strong>Naam: </strong><span>${itemData.info.firstname} ${itemData.info.lastname}</span></p>
-    <p><strong>Geboortedatum: </strong><span>${itemData.info.birthdate}</span></p>
-    <p><strong>Kenteken: </strong><span>${itemData.info.plate}</span></p>
-    <p><strong>Bij Bedrijf: </strong><span>${itemData.info.company}</span></p>
-    <p><strong>Nummer: </strong><span>${itemData.info.number}</span></p>
-    <p><strong>Verloopt op: </strong><span>${itemData.info.inswapexpire}</span></p>`;
-            
-case "insuranceallriskdocument":
-    return `<p><strong>Naam: </strong><span>${itemData.info.firstname} ${itemData.info.lastname}</span></p>
-    <p><strong>Geboortedatum: </strong><span>${itemData.info.birthdate}</span></p>
-    <p><strong>Kenteken: </strong><span>${itemData.info.plate}</span></p>
-    <p><strong>Bij Bedrijf: </strong><span>${itemData.info.company}</span></p>
-    <p><strong>Nummer: </strong><span>${itemData.info.number}</span></p>
-    <p><strong>Verloopt op: </strong><span>${itemData.info.insallexpire}</span></p>`;
-```
-
 # new qb-invenroty server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
