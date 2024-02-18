@@ -28,7 +28,7 @@
 # mh-stashes
 With this stash item you can give a stash with items in it to other players for example money, drugs or weapons, 
 it works also with mh-cashasitem.
-it also hase a wallet you can use to put all your cash and or card in it.
+it also has a walletstash so you can put all your cash and or card in it.
 
 # Possibilities
 - Your own Wallet (only cash or cards, see `config.lua` `Config.Stashes` look for `allowedItems`)
