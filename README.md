@@ -74,6 +74,7 @@ Config.Stashes = {
     ['largebagstash'] = true,
     ["missionstash"] = true,
 }
+```
 
 # Add To your inventory server side someware on the top
 ```lua
@@ -113,10 +114,10 @@ local function IsStashItemLootable(src, stash, item)
     return true
 end
 ```
+
 # Amount for inventory when you give cash items
 - Check out here, and find min and max.
 [Amount in Inventory](https://github.com/MaDHouSe79/qb-inventory/blob/afdbee97c3b4deeb63ece88b80e4142154f59f35/html/ui.html#L35)
-
 
 # Add in qb-core/shared/items.lua
 ```lua
@@ -225,7 +226,6 @@ end
     ['description'] = 'A mission suitcase.'
 },
 ```
-
 # new qb-invenroty server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
