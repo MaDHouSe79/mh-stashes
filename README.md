@@ -59,6 +59,65 @@ it also hase a wallet you can use to put all your cash and or card in it.
 - The boss will rob you and kill you if you don't bring the item where he ask for.
 
 
+# To add in your inventory config.lua file.
+```lua
+-- it works but this is for mh-stashes but this script is not released yet.
+-- this is needed in the inventory config, or the get many errors.
+-- all default true.
+Config.Stashes = { 
+    ["walletstash"] = true, 
+    ["cashstash"] = true, 
+    ["drugsstash"] = true, 
+    ["weaponstash"] = true,
+    ['smallbagstash'] = true,
+    ['mediumbagstash'] = true,
+    ['largebagstash'] = true,
+    ["missionstash"] = true,
+}
+
+# Add To your inventory server side someware on the top
+```lua
+local lastUsedStashItem = nil
+
+local function IsItemAllowedToAdd(src, stash, item)
+    if Config.Stashes[stash] then
+        if lastUsedStashItem ~= nil then
+            if lastUsedStashItem.info.allowedItems ~= nil then
+                if not lastUsedStashItem.info.allowedItems[item.name] then
+                    TriggerEvent('mh-stashes:server:allowed_items_error', src, lastUsedStashItem.info.allowedItems)
+                    lastUsedStashItem = nil
+                    return false
+                end
+            end
+        end
+    end
+    return true
+end
+
+local function IsStashItemLootable(src, stash, item)
+    if Config.Stashes[stash] then
+        if lastUsedStashItem ~= nil then
+            if lastUsedStashItem and lastUsedStashItem.info then
+                if not lastUsedStashItem.info.canloot then
+                    TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
+                    lastUsedStashItem = nil
+                    return false
+                elseif lastUsedStashItem.info.isOnMission then
+                    TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
+                    lastUsedStashItem = nil
+                    return false
+                end
+            end
+        end
+    end
+    return true
+end
+```
+# Amount for inventory when you give cash items
+- Check out here, and find min and max.
+[Amount in Inventory](https://github.com/MaDHouSe79/qb-inventory/blob/afdbee97c3b4deeb63ece88b80e4142154f59f35/html/ui.html#L35)
+
+
 # Add in qb-core/shared/items.lua
 ```lua
 -- mh-stashes
