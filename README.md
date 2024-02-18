@@ -226,7 +226,7 @@ end
     ['description'] = 'A mission suitcase.'
 },
 ```
-# new qb-invenroty server/main.lua
+# replace in qb-inventory server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
 	local src = source
