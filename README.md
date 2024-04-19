@@ -60,6 +60,9 @@ it also hase a wallet you can use to put all your cash and or card in it.
 - There are a maffia missions, and if you fail you lose all your money on cash and bank,
 - The boss will rob you and kill you if you don't bring the item where he ask for.
 
+# NOTE mh-cashasitem
+- if you already have mh-cashasitem you need to replace the code with this code below.
+
 # Add in qb-core/shared/items.lua
 ```lua
 -- mh-stashes
@@ -180,6 +183,32 @@ Config.Stashes = {
     ['largebagstash'] = true,
     ['missionstash'] = true,
 }
+```
+
+# To Add For qb-invenroty server/main.lua at line 12
+```lua
+local lastUsedStashItem = nil
+local function IsItemAllowedToAdd(src, stash, item)
+    if Config.Stashes[stash] then
+        if lastUsedStashItem ~= nil and lastUsedStashItem.info.allowedItems ~= nil and
+            not lastUsedStashItem.info.allowedItems[item] then
+            TriggerEvent('mh-stashes:server:allowed_items_error', src, lastUsedStashItem.info.allowedItems)
+            lastUsedStashItem = nil
+            return false
+        end
+    end
+    return true
+end
+
+local function IsStashItemLootable(src, stash)
+    if Config.Stashes[stash] and lastUsedStashItem ~= nil and lastUsedStashItem.info and
+        not lastUsedStashItem.info.canloot then
+        lastUsedStashItem = nil
+        TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
+        return false
+    end
+    return true
+end
 ```
 
 # For qb-invenroty server/main.lua
