@@ -6,6 +6,11 @@ Config = {}
 Config.Notify = "qb-core" -- Default:(qb-core), you can also use (roda-notify/okokNotify)
 Config.NotifyTitle = "Stash System"
 
+-- this ignores not used props for this script
+Config.IgnorePropsInHand = {
+    "v_ind_cf_chckbox2",
+}
+
 Config.Shop = {
     model = "g_m_y_korean_01",
     senario = "WORLD_HUMAN_STAND_MOBILE",
