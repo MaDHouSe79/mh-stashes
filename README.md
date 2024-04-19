@@ -24,8 +24,10 @@
 
 # My Youtube Channel
 - [Subscribe](https://www.youtube.com/c/@MaDHouSe79) 
+- [Discord](https://discord.gg/vJ9EukCmJQ)
 
-# mh-stashes
+
+# mh-stashes (BETA)
 With this stash item you can give a stash with items in it to other players for example money, drugs or weapons, 
 it works also with mh-cashasitem.
 it also hase a wallet you can use to put all your cash and or card in it.
