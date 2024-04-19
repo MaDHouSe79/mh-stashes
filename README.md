@@ -28,7 +28,7 @@
 # mh-stashes
 With this stash item you can give a stash with items in it to other players for example money, drugs or weapons, 
 it works also with mh-cashasitem.
-it also has a walletstash so you can put all your cash and or card in it.
+it also hase a wallet you can use to put all your cash and or card in it.
 
 # Possibilities
 - Your own Wallet (only cash or cards, see `config.lua` `Config.Stashes` look for `allowedItems`)
@@ -57,67 +57,6 @@ it also has a walletstash so you can put all your cash and or card in it.
 # Missions
 - There are a maffia missions, and if you fail you lose all your money on cash and bank,
 - The boss will rob you and kill you if you don't bring the item where he ask for.
-
-
-# To add in your inventory config.lua file.
-```lua
--- it works but this is for mh-stashes but this script is not released yet.
--- this is needed in the inventory config, or the get many errors.
--- all default true.
-Config.Stashes = { 
-    ["walletstash"] = true, 
-    ["cashstash"] = true, 
-    ["drugsstash"] = true, 
-    ["weaponstash"] = true,
-    ['smallbagstash'] = true,
-    ['mediumbagstash'] = true,
-    ['largebagstash'] = true,
-    ["missionstash"] = true,
-}
-```
-
-# Add To your inventory server side someware on the top
-```lua
-local lastUsedStashItem = nil
-
-local function IsItemAllowedToAdd(src, stash, item)
-    if Config.Stashes[stash] then
-        if lastUsedStashItem ~= nil then
-            if lastUsedStashItem.info.allowedItems ~= nil then
-                if not lastUsedStashItem.info.allowedItems[item.name] then
-                    TriggerEvent('mh-stashes:server:allowed_items_error', src, lastUsedStashItem.info.allowedItems)
-                    lastUsedStashItem = nil
-                    return false
-                end
-            end
-        end
-    end
-    return true
-end
-
-local function IsStashItemLootable(src, stash, item)
-    if Config.Stashes[stash] then
-        if lastUsedStashItem ~= nil then
-            if lastUsedStashItem and lastUsedStashItem.info then
-                if not lastUsedStashItem.info.canloot then
-                    TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
-                    lastUsedStashItem = nil
-                    return false
-                elseif lastUsedStashItem.info.isOnMission then
-                    TriggerEvent('mh-stashes:server:not_allowed_to_loot', src)
-                    lastUsedStashItem = nil
-                    return false
-                end
-            end
-        end
-    end
-    return true
-end
-```
-
-# Amount for inventory when you give cash items
-- Check out here, and find min and max.
-[Amount in Inventory](https://github.com/MaDHouSe79/qb-inventory/blob/afdbee97c3b4deeb63ece88b80e4142154f59f35/html/ui.html#L35)
 
 # Add in qb-core/shared/items.lua
 ```lua
@@ -226,7 +165,22 @@ end
     ['description'] = 'A mission suitcase.'
 },
 ```
-# replace in qb-inventory server/main.lua
+
+# Add in qb-inventory/config.lua
+```lua
+Config.Stashes = { 
+    ["walletstash"] = true, 
+    ["cashstash"] = true, 
+    ["drugsstash"] = true, 
+    ["weaponstash"] = true,
+    ['smallbagstash'] = true,
+    ['mediumbagstash'] = true,
+    ['largebagstash'] = true,
+    ['missionstash'] = true,
+}
+```
+
+# For qb-invenroty server/main.lua
 ```lua
 RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, toInventory, fromSlot, toSlot, fromAmount, toAmount)
 	local src = source
@@ -480,7 +434,6 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
 						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
-
 						OtherPlayer.Functions.AddItem(itemInfo["name"], toAmount, fromSlot, toItemData.info)
 						TriggerEvent('mh-cashasitem:server:updateCash', playerId, toItemData, toAmount, "add", true)
 						TriggerEvent("qb-log:server:CreateLog", "robbing", "Swapped Item", "orange",
@@ -633,10 +586,8 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 	elseif QBCore.Shared.SplitStr(fromInventory, "-")[1] == "stash" then
 		local stashId = QBCore.Shared.SplitStr(fromInventory, "-")[2]
 		local fromItemData = Stashes[stashId].items[fromSlot]
-
 		local fromAmount = tonumber(fromAmount) ~= nil and tonumber(fromAmount) or fromItemData.amount
 		if fromItemData ~= nil and fromItemData.amount >= fromAmount then
-
 			local itemInfo = QBCore.Shared.Items[fromItemData.name:lower()]
 			if toInventory == "player" or toInventory == "hotbar" then
 				local stashName = QBCore.Shared.SplitStr(stashId, "_")[1]
