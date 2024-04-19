@@ -869,23 +869,25 @@ CreateThread(function()
         if isLoggedIn then
             local ped = PlayerPedId()
             local hasItem, current = DoesThePlayerHasAStashItem()
-            if hasItem and isHoldingStash then
-                if not ishide and current ~= nil then
-                    TriggerEvent('mh-stashes:client:give', current)
-                else
-                    TriggerEvent('mh-stashes:client:take')
-                end
-            elseif hasItem and not isHoldingStash then
-                if not ishide and current ~= nil then
-                    TriggerEvent('mh-stashes:client:give', current)
-                else
-                    TriggerEvent('mh-stashes:client:take')
-                end
-            elseif not hasItem then
-                if stashObj ~= nil then
-                    TriggerEvent('mh-stashes:client:take')
-                elseif stashClot ~= nil then
-                    TriggerEvent('mh-stashes:client:take')
+            if GetHashKey(current) ~= GetHashKey('v_ind_cf_chckbox2') then
+                if hasItem and isHoldingStash then
+                    if not ishide and current ~= nil then
+                        TriggerEvent('mh-stashes:client:give', current)
+                    else
+                        TriggerEvent('mh-stashes:client:take')
+                    end
+                elseif hasItem and not isHoldingStash then
+                    if not ishide and current ~= nil then
+                        TriggerEvent('mh-stashes:client:give', current)
+                    else
+                        TriggerEvent('mh-stashes:client:take')
+                    end
+                elseif not hasItem then
+                    if stashObj ~= nil then
+                        TriggerEvent('mh-stashes:client:take')
+                    elseif stashClot ~= nil then
+                        TriggerEvent('mh-stashes:client:take')
+                    end
                 end
             end
         end
