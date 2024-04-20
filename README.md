@@ -24,9 +24,10 @@
 
 # My Youtube Channel
 - [Subscribe](https://www.youtube.com/c/@MaDHouSe79)
-- [Preview](https://www.youtube.com/watch?v=KGW8CVwHZ5E)
 - [Discord](https://discord.gg/vJ9EukCmJQ)
 
+# Preview
+- [Preview](https://www.youtube.com/watch?v=KGW8CVwHZ5E)
 
 # mh-stashes (BETA)
 With this stash item you can give a stash with items in it to other players for example money, drugs or weapons, 
