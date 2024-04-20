@@ -71,6 +71,7 @@ it also hase a wallet you can use to put all your cash and or card in it.
 ![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/largebagstash.png)
 ![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/mediumbagstash.png)
 ![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/smallbagstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/missionstash.png)
 
 
 # Add in qb-core/shared/items.lua
