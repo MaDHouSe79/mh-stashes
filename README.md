@@ -63,6 +63,16 @@ it also hase a wallet you can use to put all your cash and or card in it.
 # NOTE mh-cashasitem
 - if you already have mh-cashasitem you need to replace the code with this code below.
 
+# Item Images
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/walletstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/cashstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/drugsstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/drugsstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/largebagstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/mediumbagstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/smallbagstash.png)
+![alttext](https://github.com/MaDHouSe79/mh-stashes/blob/main/images/weaponstash.png)
+
 # Add in qb-core/shared/items.lua
 ```lua
 -- mh-stashes
