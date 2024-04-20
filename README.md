@@ -22,7 +22,7 @@
     </a>      
 </p>
 
-# My Youtube Channel
+# My Youtube/Discord Channel
 - [Subscribe](https://www.youtube.com/c/@MaDHouSe79)
 - [Discord](https://discord.gg/vJ9EukCmJQ)
 
