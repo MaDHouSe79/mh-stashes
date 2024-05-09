@@ -201,6 +201,7 @@ Config.Stashes = {
 
 # To Add For qb-invenroty server/main.lua at line 12
 ```lua
+local CashAsItemUpdateTrigger = "mh-cashasitem:server:updateCash" -- you need mh-cashasitem for this
 local lastUsedStashItem = nil
 local function IsItemAllowedToAdd(src, stash, item)
     if Config.Stashes[stash] then
@@ -291,35 +292,35 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 			if toInventory == "player" or toInventory == "hotbar" then
 				local toItemData = Player.Functions.GetItemBySlot(toSlot)
 				Player.Functions.RemoveItem(fromItemData.name, fromAmount, fromSlot)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", false)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", false)
 				TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 				if toItemData ~= nil then
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", false)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", false)
 						Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "add", false)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "add", false)
 					end
 				end
 				Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", false)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", false)
 			elseif QBCore.Shared.SplitStr(toInventory, "-")[1] == "otherplayer" then
 				local playerId = tonumber(QBCore.Shared.SplitStr(toInventory, "-")[2])
 				local OtherPlayer = QBCore.Functions.GetPlayer(playerId)
 				local toItemData = OtherPlayer.PlayerData.items[toSlot]
 				Player.Functions.RemoveItem(fromItemData.name, fromAmount, fromSlot)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 				TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 				if toItemData ~= nil then
 					local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						OtherPlayer.Functions.RemoveItem(itemInfo["name"], toAmount, fromSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', playerId, toItemData, toAmount, "remove",
+						TriggerEvent(CashAsItemUpdateTrigger, playerId, toItemData, toAmount, "remove",
 							true)
 						Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "add", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "add", true)
 						TriggerEvent("qb-log:server:CreateLog", "robbing", "Swapped Item", "orange",
 							"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
 								"* | *" .. src .. "*) swapped item; name: **" .. itemInfo["name"] ..
@@ -340,12 +341,12 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				end
 				local itemInfo = QBCore.Shared.Items[fromItemData.name:lower()]
 				OtherPlayer.Functions.AddItem(itemInfo["name"], fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', playerId, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, playerId, fromItemData, fromAmount, "add", true)
 			elseif QBCore.Shared.SplitStr(toInventory, "-")[1] == "trunk" then
 				local plate = QBCore.Shared.SplitStr(toInventory, "-")[2]
 				local toItemData = Trunks[plate].items[toSlot]
 				Player.Functions.RemoveItem(fromItemData.name, fromAmount, fromSlot)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 				TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 				if toItemData ~= nil then
 					local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
@@ -353,7 +354,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					if toItemData.name ~= fromItemData.name then
 						RemoveFromTrunk(plate, fromSlot, itemInfo["name"], toAmount)
 						Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "add", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "add", true)
 						TriggerEvent("qb-log:server:CreateLog", "trunk", "Swapped Item", "orange",
 							"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
 								"* | id: *" .. src .. "*) swapped item; name: **" .. itemInfo["name"] ..
@@ -376,7 +377,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				if Config.Stashes[fromItemData.name:lower()] then
 					TriggerEvent('mh-stashes:client:RemoveProp', src)
 				end
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 				TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 				if toItemData ~= nil then
 					local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
@@ -384,7 +385,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					if toItemData.name ~= fromItemData.name then
 						RemoveFromGlovebox(plate, fromSlot, itemInfo["name"], toAmount)
 						Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "add", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "add", true)
 						TriggerEvent("qb-log:server:CreateLog", "glovebox", "Swapped Item", "orange",
 							"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
 								"* | id: *" .. src .. "*) swapped item; name: **" .. itemInfo["name"] ..
@@ -407,7 +408,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				local allowedToAdd = IsItemAllowedToAdd(src, stashName, fromItemData.name)
 				if allowedToAdd then
 					Player.Functions.RemoveItem(fromItemData.name, fromAmount, fromSlot)
-					TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+					TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 					TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 					if toItemData ~= nil then
 						local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
@@ -415,7 +416,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 						if toItemData.name ~= fromItemData.name then
 							RemoveFromStash(stashId, toSlot, itemInfo["name"], toAmount)
 							Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-							TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "add", true)
+							TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "add", true)
 							TriggerEvent("qb-log:server:CreateLog", "stash", "Swapped Item", "orange", "**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid .. "* | id: *" .. src .. "*) swapped item; name: **" .. itemInfo["name"] .. "**, amount: **" .. toAmount .. "** with name: **" .. fromItemData.name .. "**, amount: **" .. fromAmount .. "** - stash: *" .. stashId .. "*")
 						end
 					else
@@ -432,7 +433,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 				local IsItemValid = exports['qb-traphouse']:CanItemBeSaled(fromItemData.name:lower())
 				if IsItemValid then
 					Player.Functions.RemoveItem(fromItemData.name, fromAmount, fromSlot)
-					TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+					TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 					TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 					if toItemData ~= nil then
 						local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
@@ -441,7 +442,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 							exports['qb-traphouse']:RemoveHouseItem(traphouseId, fromSlot, itemInfo["name"],
 								toAmount)
 							Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-							TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "add", true)
+							TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "add", true)
 							TriggerEvent("qb-log:server:CreateLog", "traphouse", "Swapped Item", "orange",
 								"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
 									"* | id: *" .. src .. "*) swapped item; name: **" .. itemInfo["name"] ..
@@ -471,19 +472,19 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 						TriggerEvent('mh-stashes:server:dropstash', src, fromItemData, pos)
 					else
 						CreateNewDrop(src, fromSlot, toSlot, fromAmount)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 					end
 				else
 					local toItemData = Drops[toInventory].items[toSlot]
 					Player.Functions.RemoveItem(fromItemData.name, fromAmount, fromSlot)
-					TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "remove", true)
+					TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "remove", true)
 					TriggerClientEvent("inventory:client:CheckWeapon", src, fromItemData.name)
 					if toItemData ~= nil then
 						local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
 						local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 						if toItemData.name ~= fromItemData.name then
 							Player.Functions.AddItem(toItemData.name, toAmount, fromSlot, toItemData.info)
-							TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add",
+							TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add",
 								true)
 							RemoveFromDrop(toInventory, fromSlot, itemInfo["name"], toAmount)
 							TriggerEvent("qb-log:server:CreateLog", "drop", "Swapped Item", "orange",
@@ -519,16 +520,16 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 			if toInventory == "player" or toInventory == "hotbar" then
 				local toItemData = Player.Functions.GetItemBySlot(toSlot)
 				OtherPlayer.Functions.RemoveItem(itemInfo["name"], fromAmount, fromSlot)
-				TriggerEvent('mh-cashasitem:server:updateCash', playerId, fromItemData, fromAmount, "remove", true)
+				TriggerEvent(CashAsItemUpdateTrigger, playerId, fromItemData, fromAmount, "remove", true)
 				TriggerClientEvent("inventory:client:CheckWeapon", OtherPlayer.PlayerData.source, fromItemData.name)
 				if toItemData ~= nil then
 					local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", true)
 						OtherPlayer.Functions.AddItem(itemInfo["name"], toAmount, fromSlot, toItemData.info)
-						TriggerEvent('mh-cashasitem:server:updateCash', playerId, toItemData, toAmount, "add", true)
+						TriggerEvent(CashAsItemUpdateTrigger, playerId, toItemData, toAmount, "add", true)
 						TriggerEvent("qb-log:server:CreateLog", "robbing", "Swapped Item", "orange",
 							"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
 								"* | id: *" .. src .. "*) swapped item; name: **" .. toItemData.name ..
@@ -546,26 +547,26 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 							OtherPlayer.PlayerData.source .. "*)")
 				end
 				Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", true)
 			else
 				local toItemData = OtherPlayer.PlayerData.items[toSlot]
 				OtherPlayer.Functions.RemoveItem(itemInfo["name"], fromAmount, fromSlot)
-				TriggerEvent('mh-cashasitem:server:updateCash', playerId, toItemData, fromAmount, "remove", true)
+				TriggerEvent(CashAsItemUpdateTrigger, playerId, toItemData, fromAmount, "remove", true)
 				if toItemData ~= nil then
 					local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						local itemInfo = QBCore.Shared.Items[toItemData.name:lower()]
 						OtherPlayer.Functions.RemoveItem(itemInfo["name"], toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', playerId, toItemData, toAmount, "remove",
+						TriggerEvent(CashAsItemUpdateTrigger, playerId, toItemData, toAmount, "remove",
 							true)
 						OtherPlayer.Functions.AddItem(itemInfo["name"], toAmount, fromSlot, toItemData.info)
-						TriggerEvent('mh-cashasitem:server:updateCash', playerId, toItemData, toAmount, "add", true)
+						TriggerEvent(CashAsItemUpdateTrigger, playerId, toItemData, toAmount, "add", true)
 					end
 				end
 				local itemInfo = QBCore.Shared.Items[fromItemData.name:lower()]
 				OtherPlayer.Functions.AddItem(itemInfo["name"], fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', playerId, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, playerId, fromItemData, fromAmount, "add", true)
 			end
 		else
 			TriggerClientEvent("QBCore:Notify", src, "Item doesn\'t exist??", "error")
@@ -584,7 +585,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", true)
 						AddToTrunk(plate, fromSlot, toSlot, itemInfo["name"], toAmount, toItemData.info)
 						TriggerEvent("qb-log:server:CreateLog", "trunk", "Swapped Item", "orange",
 							"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
@@ -604,7 +605,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 							"**, amount: **" .. fromAmount .. "** plate: *" .. plate .. "*")
 				end
 				Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", true)
 			else
 				local toItemData = Trunks[plate].items[toSlot]
 				RemoveFromTrunk(plate, fromSlot, itemInfo["name"], fromAmount)
@@ -637,7 +638,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", true)
 						AddToGlovebox(plate, fromSlot, toSlot, itemInfo["name"], toAmount, toItemData.info)
 						TriggerEvent("qb-log:server:CreateLog", "glovebox", "Swapped", "orange",
 							"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
@@ -657,7 +658,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 							"**, amount: **" .. fromAmount .. "** plate: *" .. plate .. "*")
 				end
 				Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", true)
 			else
 				local toItemData = Gloveboxes[plate].items[toSlot]
 				RemoveFromGlovebox(plate, fromSlot, itemInfo["name"], fromAmount)
@@ -693,7 +694,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 						local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 						if toItemData.name ~= fromItemData.name then
 							Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-							TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
+							TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", true)
 							AddToStash(stashId, fromSlot, toSlot, itemInfo["name"], toAmount, toItemData.info)
 							TriggerEvent("qb-log:server:CreateLog", "stash", "Swapped Item", "orange",
 								"**" .. GetPlayerName(src) .. "** (citizenid: *" .. Player.PlayerData.citizenid ..
@@ -714,7 +715,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					end
 					SaveStashItems(stashId, Stashes[stashId].items)
 					Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-					TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", true)
+					TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", true)
 				end
 
 			else
@@ -750,7 +751,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", true)
 						exports['qb-traphouse']:AddHouseItem(traphouseId, fromSlot, itemInfo["name"], toAmount,
 							toItemData.info, src)
 						TriggerEvent("qb-log:server:CreateLog", "stash", "Swapped Item", "orange",
@@ -771,7 +772,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 							"**, amount: **" .. fromAmount .. "** stash: *" .. traphouseId .. "*")
 				end
 				Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", true)
 			else
 				local toItemData = exports['qb-traphouse']:GetInventoryData(traphouseId, toSlot)
 				exports['qb-traphouse']:RemoveHouseItem(traphouseId, fromSlot, itemInfo["name"], fromAmount)
@@ -864,7 +865,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 		elseif QBCore.Shared.SplitStr(shopType, "_")[1] == "market" then
 			if Player.Functions.RemoveMoney("blackmoney", price, "blackmarket-item-bought") then
 				AddItem(src, itemData.name, fromAmount, toSlot, itemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, itemData.name, price, "remove", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, itemData.name, price, "remove", true)
 				QBCore.Functions.Notify(src, itemInfo["label"] .. " bought!", "success")
 				TriggerEvent("qb-log:server:CreateLog", "blackmarket", "Blackmarket item bought", "green", "**" ..
 					GetPlayerName(src) .. "** bought a " .. itemInfo["label"] .. "  for $" .. price)
@@ -920,7 +921,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 					local toAmount = tonumber(toAmount) ~= nil and tonumber(toAmount) or toItemData.amount
 					if toItemData.name ~= fromItemData.name then
 						Player.Functions.RemoveItem(toItemData.name, toAmount, toSlot)
-						TriggerEvent('mh-cashasitem:server:updateCash', src, toItemData, toAmount, "remove", true)
+						TriggerEvent(CashAsItemUpdateTrigger, src, toItemData, toAmount, "remove", true)
 						AddToDrop(fromInventory, toSlot, itemInfo["name"], toAmount, toItemData.info)
 						if itemInfo["name"] == "radio" then
 							TriggerClientEvent('Radio.Set', src, false)
@@ -943,7 +944,7 @@ RegisterNetEvent('inventory:server:SetInventoryData', function(fromInventory, to
 							"**, amount: **" .. fromAmount .. "** -  dropid: *" .. fromInventory .. "*")
 				end
 				Player.Functions.AddItem(fromItemData.name, fromAmount, toSlot, fromItemData.info)
-				TriggerEvent('mh-cashasitem:server:updateCash', src, fromItemData, fromAmount, "add", true)
+				TriggerEvent(CashAsItemUpdateTrigger, src, fromItemData, fromAmount, "add", true)
 			else
 				toInventory = tonumber(toInventory)
 				local toItemData = Drops[toInventory].items[toSlot]
