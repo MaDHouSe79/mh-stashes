@@ -80,109 +80,14 @@ it also hase a wallet you can use to put all your cash and or card in it.
 # Add in qb-core/shared/items.lua
 ```lua
 -- mh-stashes
-['walletstash'] = {
-    ['name'] = 'walletstash', 
-    ['label'] = 'Your Wallet', 
-    ['weight'] = 0, 
-    ['type'] = 'item', 
-    ['image'] = 'walletstash.png', 
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = true,
-    ['combinable'] = nil,
-    ['description'] = 'A wallet.'
-},
-
-["cashstash"] = {
-    ["name"] = "cashstash",
-    ["label"] = "Cash Suitcase",
-    ["weight"] = 1000,
-    ["type"] = "item",
-    ["image"] = "cashstash.png",
-    ["unique"] = true,
-    ["useable"] = true,
-    ["shouldClose"] = false,
-    ["combinable"] = nil,   
-    ["description"] = "a cash suitcase"
-},
-
-["drugsstash"] = {
-    ["name"] = "drugsstash",
-    ["label"] = "Drugs Suitcase",
-    ["weight"] = 1000,
-    ["type"] = "item",
-    ["image"] = "drugsstash.png",
-    ["unique"] = true,
-    ["useable"] = true,
-    ["shouldClose"] = false,
-    ["combinable"] = nil,   
-    ["description"] = "a drugs suitcase"
-},
-
-["weaponstash"] = {
-    ["name"] = "weaponstash",
-    ["label"] = "Weapon Suitcase",
-    ["weight"] = 1000,
-    ["type"] = "item",
-    ["image"] = "weaponstash.png",
-    ["unique"] = true,
-    ["useable"] = true,
-    ["shouldClose"] = false,
-    ["combinable"] = nil,   
-    ["description"] = "a weapon suitcase"
-},
-
-["smallbagstash"] = {
-    ["name"] = "smallbagstash",
-    ["label"] = "Small Bag",
-    ["weight"] = 1000,
-    ["type"] = "item",
-    ["image"] = "smallbagstash.png",
-    ["unique"] = true,
-    ["useable"] = true,
-    ["shouldClose"] = false,
-    ["combinable"] = nil,   
-    ["description"] = "a small bag"
-},
-
-["mediumbagstash"] = {
-    ["name"] = "mediumbagstash",
-    ["label"] = "Medium Bag",
-    ["weight"] = 1000,
-    ["type"] = "item",
-    ["image"] = "mediumbagstash.png",
-    ["unique"] = true,
-    ["useable"] = true,
-    ["shouldClose"] = false,
-    ["combinable"] = nil,   
-    ["description"] = "a medium bag"
-},
-
-["largebagstash"] = {
-    ["name"] = "largebagstash",
-    ["label"] = "largebagstash",
-    ["weight"] = 1000,
-    ["type"] = "item",
-    ["image"] = "largebagstash.png",
-    ["unique"] = true,
-    ["useable"] = true,
-    ["shouldClose"] = false,
-    ["combinable"] = nil,   
-    ["description"] = "a large bag "
-},
-
-['missionstash'] = {
-    ['name'] = 'missionstash', 
-    ['label'] = 'Mission Suitcase', 
-    ['weight'] = 0, 
-    ['type'] = 'item', 
-    ['image'] = 'missionstash.png', 
-    ['unique'] = false,
-    ['useable'] = false,
-    ['shouldClose'] = true,
-    ['combinable'] = nil,
-    ['description'] = 'A mission suitcase.'
-},
+walletstash                  = { name = 'walletstash',  label = 'Your Wallet', weight = 0, type = 'item', image = 'walletstash.png', unique = false, useable = false, shouldClose = true, combinable = nil, description = 'A wallet.' },
+cashstash                    = { name = "cashstash", label = "Cash Suitcase", weight = 1000, type = "item", image = "cashstash.png", unique = true, useable = true, shouldClose = false, combinable = nil, description = "a cash suitcase" },
+drugsstash                   = { name = "drugsstash", label = "Drugs Suitcase", weight = 1000, type = "item", image = "drugsstash.png", unique = true, useable = true, shouldClose = false, combinable = nil, description = "a drugs suitcase" },
+weaponstash                  = { name = "weaponstash", label = "Weapon Suitcase", weight = 1000, type = "item", image = "weaponstash.png", unique = true, useable = true, shouldClose = false, combinable = nil, description = "a weapon suitcase" },
+smallbagstash                = { name = "smallbagstash", label = "Small Bag", weight = 1000, type = "item", image = "smallbagstash.png", unique = true, useable = true, shouldClose = false, combinable = nil, description = "a small bag" },
+mediumbagstash               = { name = "mediumbagstash", label = "Medium Bag", weight = 1000, type = "item", image = "mediumbagstash.png", unique = true, useable = true, shouldClose = false, combinable = nil, description = "a medium bag" },
+largebagstash                = { name = "largebagstash", label = "largebagstash", weight = 1000, type = "item", image = "largebagstash.png", unique = true, useable = true, shouldClose = false, combinable = nil, description = "a large bag " },
+missionstash                 = { name = 'missionstash', label = 'Mission Suitcase', weight = 0, type = 'item', image = 'missionstash.png', unique = false, useable = false, shouldClose = true, combinable = nil, description = 'A mission suitcase.'},
 ```
 
 # Add in qb-inventory/config.lua
