@@ -49,7 +49,8 @@ it also hase a wallet you can use to put all your cash and or card in it.
 
 # NOTE
 - Before you start make sure you add all your items you want to use in Config.Stashes.
-- You nan not spawn in a stash item that does not work, you need to buy the stash in game by the ped.
+- You can not spawn in a stash item with `/giveitem` that does not work, you need to buy the stash in game by the ped.
+- when you want to buy a stash item you can't have one in your inventory, you can use stash item at the time.
 - if you change any value you need to restart the server
 - make sure the items in the inventory and mh-stashes config files are the same with the items.
 
