@@ -535,13 +535,15 @@ local function CreateShopPed()
                     BuyMenu()
                 end,
                 canInteract = function(entity, distance, data)
-                    if QBCore.Functions.HasItem("cashstash", 1) then return false end
-                    if QBCore.Functions.HasItem("drugsstash", 1) then return false end
-                    if QBCore.Functions.HasItem("weaponstash", 1) then return false end
-                    if QBCore.Functions.HasItem("smallbagstash", 1) then return false end
-                    if QBCore.Functions.HasItem("mediumbagstash", 1) then return false end
-                    if QBCore.Functions.HasItem("largebagstash", 1) then return false end
-                    if QBCore.Functions.HasItem("missionstash", 1) then return false end
+                    if Config.InventoryStashItemLimiet then
+                        if QBCore.Functions.HasItem("cashstash", 1) then return false end
+                        if QBCore.Functions.HasItem("drugsstash", 1) then return false end
+                        if QBCore.Functions.HasItem("weaponstash", 1) then return false end
+                        if QBCore.Functions.HasItem("smallbagstash", 1) then return false end
+                        if QBCore.Functions.HasItem("mediumbagstash", 1) then return false end
+                        if QBCore.Functions.HasItem("largebagstash", 1) then return false end
+                        if QBCore.Functions.HasItem("missionstash", 1) then return false end
+                    end
                     return true
                 end
             }},
