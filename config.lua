@@ -18,7 +18,16 @@ Config.Shop = {
     model = "g_m_y_korean_01",
     senario = "WORLD_HUMAN_STAND_MOBILE",
     coords = vector4(137.49, 170.77, 105.08, 157.01),
-    entity = nil
+    entity = nil,
+    stashprices = {
+        ["walletstash"] = 100,
+        ["smallbagstash"] = 100,
+        ["mediumbagstash"] = 100,
+        ["largebagstash"] = 100,
+        ["cashstash"] = 100,
+        ["drugsstash"] = 100,
+        ["weaponstash"] = 100,
+    }
 }
 
 Config.UseMissions = true
