@@ -9,12 +9,8 @@ local Players = {}
 ---@param src number
 ---@param reason string
 local function ExploitBan(src, reason)
-    MySQL.insert('INSERT INTO bans (name, license, discord, ip, reason, expire, bannedby) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        {GetPlayerName(src), QBCore.Functions.GetIdentifier(src, 'license'),
-         QBCore.Functions.GetIdentifier(src, 'discord'), QBCore.Functions.GetIdentifier(src, 'ip'), reason, 2147483647,
-         'mh-stashes'})
-    TriggerEvent('qb-log:server:CreateLog', 'bans', 'Player Banned', 'red',
-        string.format('%s was banned by %s for %s', GetPlayerName(src), 'mh-stashes', reason), true)
+    MySQL.insert('INSERT INTO bans (name, license, discord, ip, reason, expire, bannedby) VALUES (?, ?, ?, ?, ?, ?, ?)', {GetPlayerName(src), QBCore.Functions.GetIdentifier(src, 'license'), QBCore.Functions.GetIdentifier(src, 'discord'), QBCore.Functions.GetIdentifier(src, 'ip'), reason, 2147483647, 'mh-stashes'})
+    TriggerEvent('qb-log:server:CreateLog', 'bans', 'Player Banned', 'red', string.format('%s was banned by %s for %s', GetPlayerName(src), 'mh-stashes', reason), true)
     DropPlayer(src, 'You were permanently banned by the server for: Exploiting')
 end
 
@@ -79,16 +75,14 @@ end
 local function DeleteStashItemFromDatabase(source, item)
     local Player = QBCore.Functions.GetPlayer(source)
     if Stashes[item.info.stashid] and Stashes[item.info.stashid].owner == Player.PlayerData.citizenid then
-        MySQL.Async.fetchAll('SELECT * FROM stashitems WHERE stash = ?', {item.info.item .. '_' .. item.info.stashid},
-            function(result)
-                if result[1] then
-                    MySQL.Async.execute('DELETE FROM stashitems WHERE stash = ?',
-                        {item.info.item .. '_' .. item.info.stashid})
-                    QBCore.Functions.Notify(source, Lang:t('notify.stash_deleted'), "success")
-                    TriggerClientEvent('mh-stashes:client:syncRemoveDrop', -1, item)
-                    Stashes[item.info.stashid] = nil
-                end
-            end)
+        MySQL.Async.fetchAll('SELECT * FROM stashitems WHERE stash = ?', {item.info.item .. '_' .. item.info.stashid}, function(result)
+            if result[1] then
+                MySQL.Async.execute('DELETE FROM stashitems WHERE stash = ?', {item.info.item .. '_' .. item.info.stashid})
+                QBCore.Functions.Notify(source, Lang:t('notify.stash_deleted'), "success")
+                TriggerClientEvent('mh-stashes:client:syncRemoveDrop', -1, item)
+                Stashes[item.info.stashid] = nil
+            end
+        end)
     end
 end
 
@@ -106,20 +100,14 @@ end
 
 ---@param item string
 local function GenerateWalletID(itemName)
-    local id = QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomInt(1) ..
-                   QBCore.Shared.RandomInt(2)
+    local id = QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomInt(2)
     local result = MySQL.scalar.await('SELECT stash FROM stashitems WHERE stash = ?', {itemName .. "_" .. id})
-    if result then
-        return GenerateWalletID(itemName)
-    else
-        return id
-    end
+    if result then return GenerateWalletID(itemName) else return id end
 end
 
 ---@param item string
 local function GenerateMissionStashID(itemName)
-    local id = QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomInt(1) ..
-                   QBCore.Shared.RandomInt(2)
+    local id = QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomInt(2) .. QBCore.Shared.RandomInt(1) .. QBCore.Shared.RandomInt(2)
     local result = MySQL.scalar.await('SELECT stash FROM stashitems WHERE stash = ?', {itemName .. "_" .. id})
     if result then
         return GenerateMissionStashID(itemName)
@@ -249,9 +237,7 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
                     Player.Functions.AddItem(item, 1, false, info)
                     TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
                     TriggerClientEvent('mh-stashes:client:notify', src, Config.NotifyTitle,
-                        Lang:t('notify.purchased_a_stash', {
-                            price = item.price
-                        }), "success")
+                        Lang:t('notify.purchased_a_stash', { price = item.price }), "success")
                     TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
                     TriggerClientEvent('mh-stashes:client:give', src, item)
                 end
