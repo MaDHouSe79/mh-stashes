@@ -219,31 +219,33 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     if isCloseByShopCoords(src) then
-        if QBCore.Functions.HasItem(src, item, 1) then
-            TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.you_have_a_stash'), "error")
-        else
-            if Player.PlayerData.money.cash >= Config.Stashes[item].price then
-                if Player.Functions.RemoveMoney(src, 'cash', Config.Stashes[item].price, "stash-paid") then
-                    local new_stash_id = GenerateWalletID(item)
-                    local info = {
-                        owner = Player.PlayerData.citizenid,
-                        stashid = new_stash_id,
-                        item = Config.Stashes[item].item,
-                        allowedItems = Config.Stashes[item].allowedItems,
-                        canloot = Config.Stashes[item].canloot,
-                        isOnMission = Config.Stashes[item].isOnMission
-                    }
-                    Player.Functions.AddItem(item, 1, false, info)
-                    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
-                    TriggerClientEvent('mh-stashes:client:notify', src, Config.NotifyTitle,
-                        Lang:t('notify.purchased_a_stash', {
-                            price = item.price
-                        }), "success")
-                    TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
-                    TriggerClientEvent('mh-stashes:client:give', src, item)
-                end
+        if item ~= "missionstash" then
+            if QBCore.Functions.HasItem(src, item, 1) then
+                TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.you_have_a_stash'), "error")
             else
-                TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.not_enough_cash'), "error")
+                if Player.PlayerData.money.cash >= Config.Stashes[item].price then
+                    if Player.Functions.RemoveMoney(src, 'cash', Config.Stashes[item].price, "stash-paid") then
+                        local new_stash_id = GenerateWalletID(item)
+                        local info = {
+                            owner = Player.PlayerData.citizenid,
+                            stashid = new_stash_id,
+                            item = Config.Stashes[item].item,
+                            allowedItems = Config.Stashes[item].allowedItems,
+                            canloot = Config.Stashes[item].canloot,
+                            isOnMission = Config.Stashes[item].isOnMission
+                        }
+                        Player.Functions.AddItem(item, 1, false, info)
+                        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
+                        TriggerClientEvent('mh-stashes:client:notify', src, Config.NotifyTitle,
+                            Lang:t('notify.purchased_a_stash', {
+                                price = item.price
+                            }), "success")
+                        TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
+                        TriggerClientEvent('mh-stashes:client:give', src, item)
+                    end
+                else
+                    TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.not_enough_cash'), "error")
+                end
             end
         end
     else
