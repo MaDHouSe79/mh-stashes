@@ -215,13 +215,20 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
         if QBCore.Functions.HasItem(src, item, 1) then
             TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.you_have_a_stash'), "error")
         else
-            local new_stash_id = GenerateWalletID(item)
-            local info = {owner = Player.PlayerData.citizenid, stashid = new_stash_id, item = Config.Stashes[item].item, allowedItems = Config.Stashes[item].allowedItems, canloot = Config.Stashes[item].canloot, isOnMission = Config.Stashes[item].isOnMission}
-            Player.Functions.AddItem(item, 1, false, info)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
-            TriggerClientEvent('mh-stashes:client:notify', src, Config.NotifyTitle, Lang:t('notify.purchased_a_stash', {price = item.price}), "success")
-            TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
-            TriggerClientEvent('mh-stashes:client:give', src, item)
+            local price = Config.Shop.stashprices[item]
+            if Player.PlayerData.money.cash >= Config.Shop.stashprices[item] then
+                if Player.Functions.RemoveMoney(src, 'cash', Config.Shop.stashprices[item], "stash-paid") then
+                    local new_stash_id = GenerateWalletID(item)
+                    local info = {owner = Player.PlayerData.citizenid, stashid = new_stash_id, item = Config.Stashes[item].item, allowedItems = Config.Stashes[item].allowedItems, canloot = Config.Stashes[item].canloot, isOnMission = Config.Stashes[item].isOnMission}
+                    Player.Functions.AddItem(item, 1, false, info)
+                    TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
+                    TriggerClientEvent('mh-stashes:client:notify', src, Config.NotifyTitle, Lang:t('notify.purchased_a_stash', {price = item.price}), "success")
+                    TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
+                    TriggerClientEvent('mh-stashes:client:give', src, item)
+                end
+            else
+                TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.not_enough_cash'), "error")
+            end
         end
     else
         ExploitBan(src, "Exploit")
