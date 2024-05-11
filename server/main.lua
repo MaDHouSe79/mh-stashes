@@ -222,7 +222,7 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
         if QBCore.Functions.HasItem(src, item, 1) then
             TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.you_have_a_stash'), "error")
         else
-            local price = Config.Shop.stashprices[item]
+            local price = Config.Stashes[item].price
             if Player.PlayerData.money.cash >= Config.Shop.stashprices[item] then
                 if Player.Functions.RemoveMoney(src, 'cash', Config.Shop.stashprices[item], "stash-paid") then
                     local new_stash_id = GenerateWalletID(item)
