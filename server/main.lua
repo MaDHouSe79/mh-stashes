@@ -78,7 +78,7 @@ local function DeleteStashItemFromDatabase(source, item)
         MySQL.Async.fetchAll('SELECT * FROM stashitems WHERE stash = ?', {item.info.item .. '_' .. item.info.stashid}, function(result)
             if result[1] then
                 MySQL.Async.execute('DELETE FROM stashitems WHERE stash = ?', {item.info.item .. '_' .. item.info.stashid})
-                QBCore.Functions.Notify(source, Lang:t('notify.stash_deleted'), "success")
+                TriggerClientEvent('mh-stashes:client:notify', source, Lang:t('notify.stash_deleted'), "success")
                 TriggerClientEvent('mh-stashes:client:syncRemoveDrop', -1, item)
                 Stashes[item.info.stashid] = nil
             end
@@ -236,10 +236,7 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
                         }
                         Player.Functions.AddItem(item, 1, false, info)
                         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
-                        TriggerClientEvent('mh-stashes:client:notify', src, Config.NotifyTitle,
-                            Lang:t('notify.purchased_a_stash', {
-                                price = item.price
-                            }), "success")
+                        TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.purchased_a_stash', { price = item.price }), "success")
                         TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
                         TriggerClientEvent('mh-stashes:client:give', src, item)
                     end
@@ -292,10 +289,7 @@ RegisterServerEvent('mh-stashes:server:getPickup', function()
             TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
             CreateStashMissionItem(item, info, amount)
             local text = "Go Back and deliver the suitcase to your boss and don't steal or you lose everyting!"
-            QBCore.Functions.Notify(src, {
-                text = "Mission",
-                caption = text
-            }, nil, 8000)
+            QBCore.Functions.Notify(src, {text = "Mission", caption = text }, nil, 8000)
         else
             ExploitBan(src, "Exploit")
         end
@@ -316,9 +310,7 @@ RegisterServerEvent('mh-stashes:server:pickup', function(item)
         }
         Player.Functions.AddItem(item.name, 1, false, info)
         TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], "add", 1)
-        TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.pickup_a_stash', {
-            item = item.name
-        }), "success")
+        TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.pickup_a_stash', { item = item.name }), "success")
         TriggerClientEvent('mh-stashes:client:syncRemoveDrop', -1, item)
         TriggerClientEvent('mh-stashes:client:give', src, item.name)
         DeleteStash(item)
@@ -338,12 +330,7 @@ RegisterServerEvent('mh-stashes:server:allowed_items_error', function(source, al
     for k, v in pairs(allowedItems) do
         items = items .. " " .. k
     end
-    QBCore.Functions.Notify(src, {
-        text = "Stashes",
-        caption = Lang:t('notify.allowed_items_error', {
-            items = items
-        })
-    }, "error", 5000)
+    QBCore.Functions.Notify(src, {text = "Stashes", caption = Lang:t('notify.allowed_items_error', { items = items }) }, "error", 5000)
     TriggerClientEvent('qb-inventory:client:closeinv', src)
 end)
 
@@ -379,10 +366,7 @@ RegisterServerEvent('mh-stashes:server:StartMission', function()
             model = mission.model
         }
         TriggerClientEvent('mh-stashes:client:StartMission', src, Players[src])
-        QBCore.Functions.Notify(src, {
-            text = Lang:t('mission.notify.title'),
-            caption = Lang:t("mission.notify.start")
-        })
+        QBCore.Functions.Notify(src, { text = Lang:t('mission.notify.title'), caption = Lang:t("mission.notify.start") })
     else
         ExploitBan(src, "Exploit")
     end
@@ -409,10 +393,7 @@ RegisterServerEvent('mh-stashes:server:DeliverItem', function()
                 Player.Functions.SetMoney('bank', 0, nil)
                 TriggerClientEvent('mh-stashes:client:KillPlayer', src)
                 TriggerClientEvent('mh-stashes:client:DeleteAllStashDrops', src)
-                QBCore.Functions.Notify(src, {
-                    text = Lang:t('mission.notify.title'),
-                    caption = Lang:t('mission.notify.failed')
-                }, "error", 8000)
+                QBCore.Functions.Notify(src, { text = Lang:t('mission.notify.title'), caption = Lang:t('mission.notify.failed') }, "error", 8000)
             end
         else
             ExploitBan(src, "Exploit")
