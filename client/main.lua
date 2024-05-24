@@ -858,8 +858,8 @@ RegisterNetEvent('qb-radialmenu:client:onRadialmenuOpen', function()
     end
 end)
 
-RegisterNetEvent('mh-stashes:client:notify', function(title, message, type, time)
-    Notify(Config.NotifyTitle, message, type, time)
+RegisterNetEvent('mh-stashes:client:notify', function(message, type, length)
+    Notify(Config.NotifyTitle, message, type, length)
 end)
 
 RegisterNetEvent('mh-stashes:client:DeleteAllStashDrops', function()
