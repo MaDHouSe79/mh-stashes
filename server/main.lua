@@ -235,7 +235,7 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
                             isOnMission = Config.Stashes[item].isOnMission
                         }
                         Player.Functions.AddItem(item, 1, false, info)
-                        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
+                        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
                         TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.purchased_a_stash', { price = item.price }), "success")
                         TriggerClientEvent('mh-stashes:client:open', src, info.stashid, item)
                         TriggerClientEvent('mh-stashes:client:give', src, item)
@@ -260,7 +260,7 @@ RegisterServerEvent('mh-stashes:server:dropstash', function(source, item, coords
             TriggerClientEvent('mh-stashes:client:syncAddDrop', -1, Player.PlayerData.citizenid, item, coords)
             TriggerClientEvent('mh-stashes:client:RemoveProp', src)
             Player.Functions.RemoveItem(item.name, 1, item.slot, nil)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], "remove", 1)
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], "remove", 1)
         else
             TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.stash_is_dropped'), "error")
         end
@@ -286,7 +286,7 @@ RegisterServerEvent('mh-stashes:server:getPickup', function()
                 isOnMission = true
             }
             Player.Functions.AddItem(item, 1, false, info)
-            TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
+            TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item], "add", 1)
             CreateStashMissionItem(item, info, amount)
             local text = "Go Back and deliver the suitcase to your boss and don't steal or you lose everyting!"
             QBCore.Functions.Notify(src, {text = "Mission", caption = text }, nil, 8000)
@@ -309,7 +309,7 @@ RegisterServerEvent('mh-stashes:server:pickup', function(item)
             isOnMission = item.info.isOnMission
         }
         Player.Functions.AddItem(item.name, 1, false, info)
-        TriggerClientEvent('inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], "add", 1)
+        TriggerClientEvent('qb-inventory:client:ItemBox', src, QBCore.Shared.Items[item.name], "add", 1)
         TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.pickup_a_stash', { item = item.name }), "success")
         TriggerClientEvent('mh-stashes:client:syncRemoveDrop', -1, item)
         TriggerClientEvent('mh-stashes:client:give', src, item.name)
