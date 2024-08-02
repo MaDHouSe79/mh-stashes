@@ -44,7 +44,7 @@ it also hase a wallet you can use to put all your cash and or card in it.
 - [qb-core](https://github.com/qbcore-framework/qb-core)
 - [qb-target](https://github.com/qbcore-framework/qb-target)
 - [qb-radialmenu](https://github.com/qbcore-framework/qb-radialmenu)
-- [qb-inventiory](https://github.com/qbcore-framework/qb-inventory)
+- [qb-inventiory] (old version)
 - [mh-cashasitem](https://github.com/MaDHouSe79/mh-cashasitem)
 
 # NOTE
