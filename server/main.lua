@@ -224,7 +224,7 @@ RegisterServerEvent('mh-stashes:server:buy', function(item)
                 TriggerClientEvent('mh-stashes:client:notify', src, Lang:t('notify.you_have_a_stash'), "error")
             else
                 if Player.PlayerData.money.cash >= Config.Stashes[item].price then
-                    if Player.Functions.RemoveMoney(src, 'cash', Config.Stashes[item].price, "stash-paid") then
+                    if Player.Functions.RemoveMoney('cash', Config.Stashes[item].price, "stash-paid") then
                         local new_stash_id = GenerateWalletID(item)
                         local info = {
                             owner = Player.PlayerData.citizenid,
